@@ -1,0 +1,17 @@
+{
+  "name": "2fauth.js",
+  "version": "0.1.0",
+  "description": "A module for interacting with the 2FAuth API",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "2fauth"
+  ],
+  "author": "povario",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.9.0"
+  }
+}
