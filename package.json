@@ -17,7 +17,7 @@
   "author": "povario",
   "type": "commonjs",
   "main": "./dist/TwoAuthApi.js",
-  "types": "./dist/types/*.d.ts",
+  "types": "./dist/types/TwoAuthApi.d.ts",
   "files": [
     "./dist"
   ],
