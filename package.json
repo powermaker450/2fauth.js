@@ -1,19 +1,31 @@
 {
-  "name": "2fauth.js",
+  "name": "@povario/2fauth",
   "version": "0.1.0",
   "description": "A module for interacting with the 2FAuth API",
-  "main": "./dist/TwoAuthApi.js",
-  "types": "./dist/types/*.d.ts",
-  "files": ["./dist"],
-  "scripts": {
-    "build": "tsc"
-  },
   "keywords": [
     "2fauth"
   ],
-  "author": "povario",
+  "homepage": "https://github.com/powermaker450/2fauth.js#readme",
+  "bugs": {
+    "url": "https://github.com/powermaker450/2fauth.js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/powermaker450/2fauth.js.git"
+  },
   "license": "MIT",
+  "author": "povario",
+  "type": "commonjs",
+  "main": "./dist/TwoAuthApi.js",
+  "types": "./dist/types/*.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "axios": "^1.9.0"
-  }
+  },
+  "devDependencies": {}
 }
