@@ -52,7 +52,9 @@ export class TwoAuthGroups {
    * @returns The newly updated group
    */
   public async update(id: number, name: string): Promise<Group> {
-    const res = await this.api.put<Group>(TwoAuthGroups.BASE_ROUTE + `/${id}`, { name });
+    const res = await this.api.put<Group>(TwoAuthGroups.BASE_ROUTE + `/${id}`, {
+      name,
+    });
     return res.data;
   }
 
@@ -74,7 +76,10 @@ export class TwoAuthGroups {
    * @returns The newly updated group
    */
   public async assign(id: number, ids: number[]): Promise<Group> {
-    const res = await this.api.post<Group>(TwoAuthGroups.BASE_ROUTE + `/${id}/assign`, { ids });
+    const res = await this.api.post<Group>(
+      TwoAuthGroups.BASE_ROUTE + `/${id}/assign`,
+      { ids },
+    );
     return res.data;
   }
 
@@ -84,8 +89,14 @@ export class TwoAuthGroups {
    * @param id - The ID of the group
    * @param withSecret - Append the secret property to the accounts
    */
-  public async getAccounts<S extends boolean = false>(id: number, ...args: S extends true ? [S] : []): Promise<Account<S>[]> {
-    const res = await this.api.get<Account<S>[]>(TwoAuthGroups.BASE_ROUTE + `/${id}/twofaccounts`, { withSecret: args[0] });
+  public async getAccounts<S extends boolean = false>(
+    id: number,
+    ...args: S extends true ? [S] : []
+  ): Promise<Account<S>[]> {
+    const res = await this.api.get<Account<S>[]>(
+      TwoAuthGroups.BASE_ROUTE + `/${id}/twofaccounts`,
+      { withSecret: args[0] },
+    );
     return res.data;
   }
 }

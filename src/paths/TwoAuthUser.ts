@@ -8,7 +8,7 @@ export class TwoAuthUser {
   public constructor(api: TwoAuthApi) {
     this.api = api;
   }
-  
+
   /**
    * Get info about the current user.
    */

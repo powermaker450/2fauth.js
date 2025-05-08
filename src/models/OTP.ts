@@ -12,7 +12,7 @@ interface TOTP extends OTPCommons {
 }
 
 interface HOTP extends OTPCommons {
-  otp_type: "hotp"
+  otp_type: "hotp";
   counter: number;
 }
 

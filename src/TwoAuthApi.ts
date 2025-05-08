@@ -1,5 +1,14 @@
 import axios, { Axios, AxiosResponse } from "axios";
-import { TwoAuthAccounts, TwoAuthGroups, TwoAuthIcons, TwoAuthOTP, TwoAuthQRCode, TwoAuthSettings, TwoAuthUser, TwoAuthUserPrefs } from "./paths";
+import {
+  TwoAuthAccounts,
+  TwoAuthGroups,
+  TwoAuthIcons,
+  TwoAuthOTP,
+  TwoAuthQRCode,
+  TwoAuthSettings,
+  TwoAuthUser,
+  TwoAuthUserPrefs,
+} from "./paths";
 import { TwoAuthUsers } from "./paths/TwoAuthUsers";
 
 export class TwoAuthApi {
@@ -22,7 +31,7 @@ export class TwoAuthApi {
 
     this.axios = axios.create({
       baseURL,
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     this.groups = new TwoAuthGroups(this);
@@ -36,23 +45,40 @@ export class TwoAuthApi {
     this.users = new TwoAuthUsers(this);
   }
 
-  public async delete(url: string, params?: object): Promise<AxiosResponse<void>> {
+  public async delete(
+    url: string,
+    params?: object,
+  ): Promise<AxiosResponse<void>> {
     return await this.axios.delete<void>(url, { params });
   }
 
-  public async get<T extends object | unknown = unknown>(url: string, params?: object): Promise<AxiosResponse<T>> {
+  public async get<T extends object | unknown = unknown>(
+    url: string,
+    params?: object,
+  ): Promise<AxiosResponse<T>> {
     return await this.axios.get<T>(url, { params });
   }
 
-  public async post<T extends object | unknown = unknown>(url: string, data?: object, params?: object): Promise<AxiosResponse<T>> {
+  public async post<T extends object | unknown = unknown>(
+    url: string,
+    data?: object,
+    params?: object,
+  ): Promise<AxiosResponse<T>> {
     return await this.axios.post<T>(url, data, { params });
   }
 
-  public async put<T extends object | unknown = unknown>(url: string, data?: object, params?: object): Promise<AxiosResponse<T>> {
+  public async put<T extends object | unknown = unknown>(
+    url: string,
+    data?: object,
+    params?: object,
+  ): Promise<AxiosResponse<T>> {
     return await this.axios.put<T>(url, data, { params });
   }
 
-  public async patch<T extends object | unknown = unknown>(url: string, data?: object) {
+  public async patch<T extends object | unknown = unknown>(
+    url: string,
+    data?: object,
+  ) {
     return await this.axios.patch<T>(url, data);
   }
 }

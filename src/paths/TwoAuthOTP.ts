@@ -25,7 +25,7 @@ export class TwoAuthOTP {
    * Create a new 2FA account
    *
    * @param data - Data for the new 2FA account
-   * 
+   *
    * @returns OTP
    */
   public async create(data: CreateTwoFAccount | OTPAuthUri): Promise<OTP> {

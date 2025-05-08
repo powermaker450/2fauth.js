@@ -1,12 +1,17 @@
-import { Account, CreateTwoFAccount, ExportResponse, OTPAuthUri, TwoFAccount } from "../models";
+import {
+  Account,
+  CreateTwoFAccount,
+  ExportResponse,
+  OTPAuthUri,
+  TwoFAccount,
+} from "../models";
 import { TwoAuthApi } from "../TwoAuthApi";
 
-type GetAllArgs<S extends boolean, O extends boolean> = 
-  S extends true
-    ? O extends true
-      ? [S, O]
-      : [S]
-    : [];
+type GetAllArgs<S extends boolean, O extends boolean> = S extends true
+  ? O extends true
+    ? [S, O]
+    : [S]
+  : [];
 
 export class TwoAuthAccounts {
   private static readonly BASE_ROUTE = "/api/v1/twofaccounts";
@@ -23,8 +28,13 @@ export class TwoAuthAccounts {
    *
    * @returns An array of 2FA accounts
    */
-  public async getAll<S extends boolean = false, O extends boolean = false>(...args: GetAllArgs<S, O>): Promise<TwoFAccount<S>[]> {
-    const res = await this.api.get<TwoFAccount<S>[]>(TwoAuthAccounts.BASE_ROUTE, { withSecret: args[0], withOtp: args[1] });
+  public async getAll<S extends boolean = false, O extends boolean = false>(
+    ...args: GetAllArgs<S, O>
+  ): Promise<TwoFAccount<S>[]> {
+    const res = await this.api.get<TwoFAccount<S>[]>(
+      TwoAuthAccounts.BASE_ROUTE,
+      { withSecret: args[0], withOtp: args[1] },
+    );
     return res.data;
   }
 
@@ -35,8 +45,13 @@ export class TwoAuthAccounts {
    *
    * @return A new 2FA account
    */
-  public async create(data: CreateTwoFAccount | OTPAuthUri): Promise<Account<true>> {
-    const res = await this.api.post<Account<true>>(TwoAuthAccounts.BASE_ROUTE, data);
+  public async create(
+    data: CreateTwoFAccount | OTPAuthUri,
+  ): Promise<Account<true>> {
+    const res = await this.api.post<Account<true>>(
+      TwoAuthAccounts.BASE_ROUTE,
+      data,
+    );
     return res.data;
   }
 
@@ -56,8 +71,14 @@ export class TwoAuthAccounts {
    *
    * @return A 2FA account
    */
-  public async get<S extends boolean = false>(id: number, ...args: S extends true ? [S] : []): Promise<Account<S>> {
-    const res = await this.api.get<Account<S>>(TwoAuthAccounts.BASE_ROUTE + `/${id}`, { withSecret: args[0] });
+  public async get<S extends boolean = false>(
+    id: number,
+    ...args: S extends true ? [S] : []
+  ): Promise<Account<S>> {
+    const res = await this.api.get<Account<S>>(
+      TwoAuthAccounts.BASE_ROUTE + `/${id}`,
+      { withSecret: args[0] },
+    );
     return res.data;
   }
 
@@ -69,7 +90,10 @@ export class TwoAuthAccounts {
    * @return The newly updated 2FA account
    */
   public async update(id: number, data: Account): Promise<Account> {
-    const res = await this.api.put<Account>(TwoAuthAccounts.BASE_ROUTE + `/${id}`, data);
+    const res = await this.api.put<Account>(
+      TwoAuthAccounts.BASE_ROUTE + `/${id}`,
+      data,
+    );
     return res.data;
   }
 
@@ -90,10 +114,17 @@ export class TwoAuthAccounts {
    * @return An array of converted 2FA accounts
    *
    */
-  public async migrate<S extends boolean = false>(payload: string | FormData, ...args: S extends true ? [S] : []): Promise<Account<S>[]> {
+  public async migrate<S extends boolean = false>(
+    payload: string | FormData,
+    ...args: S extends true ? [S] : []
+  ): Promise<Account<S>[]> {
     const data = typeof payload === "string" ? { payload } : payload;
 
-    const res = await this.api.post<Account<S>[]>(TwoAuthAccounts.BASE_ROUTE + "/migration", data, { withSecret: args[0] });
+    const res = await this.api.post<Account<S>[]>(
+      TwoAuthAccounts.BASE_ROUTE + "/migration",
+      data,
+      { withSecret: args[0] },
+    );
     return res.data;
   }
 
@@ -105,7 +136,10 @@ export class TwoAuthAccounts {
    * @returns A 2FA account
    */
   public async preview(uri: string): Promise<TwoFAccount> {
-    const res = await this.api.post<TwoFAccount>(TwoAuthAccounts.BASE_ROUTE + "/preview", { uri });
+    const res = await this.api.post<TwoFAccount>(
+      TwoAuthAccounts.BASE_ROUTE + "/preview",
+      { uri },
+    );
     return res.data;
   }
 
@@ -126,7 +160,10 @@ export class TwoAuthAccounts {
    * @return A message indicating success
    */
   public async withdraw(ids: number[]): Promise<{ message: string }> {
-    const res = await this.api.patch<{ message: string }>(TwoAuthAccounts.BASE_ROUTE + "/withdraw", { ids });
+    const res = await this.api.patch<{ message: string }>(
+      TwoAuthAccounts.BASE_ROUTE + "/withdraw",
+      { ids },
+    );
     return res.data;
   }
 
@@ -135,10 +172,16 @@ export class TwoAuthAccounts {
    *
    * @param ids - An array of 2FA account IDs to obtain
    *
-   * @return Either a list of OTPAuthUris or 2FAuth objects 
+   * @return Either a list of OTPAuthUris or 2FAuth objects
    */
-  public async export<O extends boolean = false>(ids: number[], ...args: O extends true ? [O] : []): Promise<ExportResponse<O>> {
-    const res = await this.api.get<ExportResponse<O>>(TwoAuthAccounts.BASE_ROUTE + "/export", { ids, otpauth: args[0] });
+  public async export<O extends boolean = false>(
+    ids: number[],
+    ...args: O extends true ? [O] : []
+  ): Promise<ExportResponse<O>> {
+    const res = await this.api.get<ExportResponse<O>>(
+      TwoAuthAccounts.BASE_ROUTE + "/export",
+      { ids, otpauth: args[0] },
+    );
     return res.data;
   }
 
@@ -149,8 +192,14 @@ export class TwoAuthAccounts {
    *
    * @return An array of 2FA accounts
    */
-  public async getAllInGroup<S extends boolean = false>(id: number, ...args: S extends true ? [S] : []): Promise<TwoFAccount<S>[]> {
-    const res = await this.api.get<TwoFAccount<S>[]>(TwoAuthAccounts.BASE_ROUTE + `/${id}/twofaccounts`, { withSecret: args[0] });
+  public async getAllInGroup<S extends boolean = false>(
+    id: number,
+    ...args: S extends true ? [S] : []
+  ): Promise<TwoFAccount<S>[]> {
+    const res = await this.api.get<TwoFAccount<S>[]>(
+      TwoAuthAccounts.BASE_ROUTE + `/${id}/twofaccounts`,
+      { withSecret: args[0] },
+    );
     return res.data;
   }
 }

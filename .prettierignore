@@ -1,0 +1,11 @@
+# Folders
+dist
+node_modules
+
+# Files
+.prettierrc
+LICENSE
+package.json
+pnpm-lock.yaml
+README.md
+tsconfig.json

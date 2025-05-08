@@ -28,7 +28,10 @@ export class TwoAuthQRCode {
    * @returns Decoded QR code data
    */
   public async decode(data: FormData): Promise<DecodedQRCode> {
-    const res = await this.api.post<DecodedQRCode>(`/api/v1/qrcode/decode`, data);
+    const res = await this.api.post<DecodedQRCode>(
+      `/api/v1/qrcode/decode`,
+      data,
+    );
     return res.data;
   }
 }

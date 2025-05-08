@@ -8,7 +8,7 @@ export class TwoAuthUsers {
   public constructor(api: TwoAuthApi) {
     this.api = api;
   }
-  
+
   /**
    * Get all registered users. (Requires admin role)
    *
@@ -25,10 +25,13 @@ export class TwoAuthUsers {
    * @return The newly created User
    */
   public async create(data: CreateUser): Promise<AdminUserRead> {
-    const res = await this.api.post<AdminUserRead>(TwoAuthUsers.BASE_ROUTE, data);
+    const res = await this.api.post<AdminUserRead>(
+      TwoAuthUsers.BASE_ROUTE,
+      data,
+    );
     return res.data;
   }
-  
+
   /**
    * Get a single registered user. (Requires admin role)
    *
@@ -37,10 +40,12 @@ export class TwoAuthUsers {
    * @return A single User
    */
   public async get(id: number): Promise<AdminUserRead> {
-    const res = await this.api.get<AdminUserRead>(TwoAuthUsers.BASE_ROUTE + `/${id}`);
+    const res = await this.api.get<AdminUserRead>(
+      TwoAuthUsers.BASE_ROUTE + `/${id}`,
+    );
     return res.data;
   }
-  
+
   /**
    * Delete a user. (Requires admin role)
    *
@@ -58,11 +63,17 @@ export class TwoAuthUsers {
    *
    * @return The newly updated User
    */
-  public async editAdmin(id: number, is_admin: boolean): Promise<AdminUserRead> {
-    const res = await this.api.patch<AdminUserRead>(TwoAuthUsers.BASE_ROUTE + `/${id}/promote`, { is_admin });
+  public async editAdmin(
+    id: number,
+    is_admin: boolean,
+  ): Promise<AdminUserRead> {
+    const res = await this.api.patch<AdminUserRead>(
+      TwoAuthUsers.BASE_ROUTE + `/${id}/promote`,
+      { is_admin },
+    );
     return res.data;
   }
-  
+
   /**
    * Reset a user's password. (Requires admin role)
    *
@@ -71,7 +82,9 @@ export class TwoAuthUsers {
    * @return The user the password was reset on
    */
   public async resetPassword(id: number): Promise<AdminUserRead> {
-    const res = await this.api.patch<AdminUserRead>(TwoAuthUsers.BASE_ROUTE + `/${id}/password/reset`);
+    const res = await this.api.patch<AdminUserRead>(
+      TwoAuthUsers.BASE_ROUTE + `/${id}/password/reset`,
+    );
     return res.data;
   }
 
@@ -93,8 +106,15 @@ export class TwoAuthUsers {
    *
    * @return An array of authentication logs
    */
-  public async getLoginHistory(id: number, limit?: number, period?: number): Promise<AuthenticationLog[]> {
-    const res = await this.api.get<AuthenticationLog[]>(TwoAuthUsers.BASE_ROUTE + `/${id}/authentications`, { limit, period });
+  public async getLoginHistory(
+    id: number,
+    limit?: number,
+    period?: number,
+  ): Promise<AuthenticationLog[]> {
+    const res = await this.api.get<AuthenticationLog[]>(
+      TwoAuthUsers.BASE_ROUTE + `/${id}/authentications`,
+      { limit, period },
+    );
     return res.data;
   }
 

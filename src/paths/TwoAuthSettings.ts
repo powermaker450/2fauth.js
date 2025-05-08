@@ -39,7 +39,9 @@ export class TwoAuthSettings {
    * @returns An application setting
    */
   public async get(name: string): Promise<Setting> {
-    const res = await this.api.get<Setting>(TwoAuthSettings.BASE_ROUTE + `/${name}`);
+    const res = await this.api.get<Setting>(
+      TwoAuthSettings.BASE_ROUTE + `/${name}`,
+    );
     return res.data;
   }
 
@@ -52,7 +54,10 @@ export class TwoAuthSettings {
    * @returns THe newly updated setting
    */
   public async update(name: string, value: Setting["value"]): Promise<Setting> {
-    const res = await this.api.put<Setting>(TwoAuthSettings.BASE_ROUTE + `/${name}`, { value });
+    const res = await this.api.put<Setting>(
+      TwoAuthSettings.BASE_ROUTE + `/${name}`,
+      { value },
+    );
     return res.data;
   }
 

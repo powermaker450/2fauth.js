@@ -3,7 +3,7 @@ import { TwoAuthApi } from "../TwoAuthApi";
 
 export class TwoAuthUserPrefs {
   private static readonly BASE_ROUTE = "/api/v1/user/preferences";
-  private api: TwoAuthApi; 
+  private api: TwoAuthApi;
 
   public constructor(api: TwoAuthApi) {
     this.api = api;
@@ -23,7 +23,9 @@ export class TwoAuthUserPrefs {
    * Get a single setting.
    */
   public async get(name: string): Promise<Setting> {
-    const res = await this.api.get<Setting>(TwoAuthUserPrefs.BASE_ROUTE + `/${name}`);
+    const res = await this.api.get<Setting>(
+      TwoAuthUserPrefs.BASE_ROUTE + `/${name}`,
+    );
     return res.data;
   }
 
@@ -32,8 +34,14 @@ export class TwoAuthUserPrefs {
    *
    * @returns The modified setting
    */
-  public async update(name: string, value: string | boolean | number): Promise<Setting<typeof value>> {
-    const res = await this.api.put<Setting<typeof value>>(TwoAuthUserPrefs.BASE_ROUTE + `/${name}`, { value });
+  public async update(
+    name: string,
+    value: string | boolean | number,
+  ): Promise<Setting<typeof value>> {
+    const res = await this.api.put<Setting<typeof value>>(
+      TwoAuthUserPrefs.BASE_ROUTE + `/${name}`,
+      { value },
+    );
     return res.data;
   }
 }

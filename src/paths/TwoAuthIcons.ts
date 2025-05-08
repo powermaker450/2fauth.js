@@ -17,7 +17,10 @@ export class TwoAuthIcons {
    * @returns The icon filname
    */
   public async upload(image: FormData): Promise<ImageUploadResponse> {
-    const res = await this.api.post<ImageUploadResponse>(TwoAuthIcons.BASE_ROUTE, image);
+    const res = await this.api.post<ImageUploadResponse>(
+      TwoAuthIcons.BASE_ROUTE,
+      image,
+    );
     return res.data;
   }
 

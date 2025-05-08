@@ -13,14 +13,18 @@ interface TwoFAccountCommons<WithSecret extends boolean = false> {
   group_id: number | null;
 }
 
-interface TOTPAccount<WithSecret extends boolean = false> extends TwoFAccountCommons<WithSecret> {
+interface TOTPAccount<WithSecret extends boolean = false>
+  extends TwoFAccountCommons<WithSecret> {
   otp_type: "totp";
   period: number;
 }
 
-interface HOTPAccount<WithSecret extends boolean = false> extends TwoFAccountCommons<WithSecret> {
+interface HOTPAccount<WithSecret extends boolean = false>
+  extends TwoFAccountCommons<WithSecret> {
   otp_type: "hotp";
   counter: number;
 }
 
-export type TwoFAccount<WithSecret extends boolean = false> = TOTPAccount<WithSecret> | HOTPAccount<WithSecret>;
+export type TwoFAccount<WithSecret extends boolean = false> =
+  | TOTPAccount<WithSecret>
+  | HOTPAccount<WithSecret>;
