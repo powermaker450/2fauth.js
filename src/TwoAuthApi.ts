@@ -45,6 +45,9 @@ export class TwoAuthApi {
     this.users = new TwoAuthUsers(this);
   }
 
+  /**
+   * @internal
+   */
   public async delete(
     url: string,
     params?: object,
@@ -52,6 +55,9 @@ export class TwoAuthApi {
     return await this.axios.delete<void>(url, { params });
   }
 
+  /**
+   * @internal
+   */
   public async get<T extends object | unknown = unknown>(
     url: string,
     params?: object,
@@ -59,6 +65,9 @@ export class TwoAuthApi {
     return await this.axios.get<T>(url, { params });
   }
 
+  /**
+   * @internal
+   */
   public async post<T extends object | unknown = unknown>(
     url: string,
     data?: object,
@@ -67,6 +76,9 @@ export class TwoAuthApi {
     return await this.axios.post<T>(url, data, { params });
   }
 
+  /**
+   * @internal
+   */
   public async put<T extends object | unknown = unknown>(
     url: string,
     data?: object,
@@ -75,6 +87,9 @@ export class TwoAuthApi {
     return await this.axios.put<T>(url, data, { params });
   }
 
+  /**
+   * @internal
+   */
   public async patch<T extends object | unknown = unknown>(
     url: string,
     data?: object,
