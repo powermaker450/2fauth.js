@@ -1,10 +1,8 @@
-type PreferenceValue = string | number | boolean;
-
 export interface UserRead {
   id: number;
   name: string;
   email: string;
   oauth_provider: string | null;
-  preferences: Record<string, PreferenceValue>;
+  preferences: Record<string, string | number | boolean>;
   is_admin: boolean;
 }

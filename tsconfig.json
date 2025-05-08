@@ -2,10 +2,14 @@
   "compilerOptions": {
     "target": "es2021",
     "module": "commonjs",
-    "rootDir": "./src",
+    "rootDir": "src",
+
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "declarationMap": true,
     "sourceMap": true,
+
     "outDir": "./dist",
-    "removeComments": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

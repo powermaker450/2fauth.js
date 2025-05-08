@@ -2,7 +2,9 @@
   "name": "2fauth.js",
   "version": "0.1.0",
   "description": "A module for interacting with the 2FAuth API",
-  "main": "dist/main.js",
+  "main": "./dist/TwoAuthApi.js",
+  "types": "./dist/types/*.d.ts",
+  "files": ["./dist"],
   "scripts": {
     "build": "tsc"
   },
