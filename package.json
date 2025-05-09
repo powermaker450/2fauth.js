@@ -1,5 +1,5 @@
 {
-  "name": "@povario/2fauth",
+  "name": "@povario/2fauth.js",
   "version": "0.1.0",
   "description": "A module for interacting with the 2FAuth API",
   "keywords": [
@@ -15,9 +15,9 @@
   },
   "license": "MIT",
   "author": "povario",
-  "type": "commonjs",
+  "type": "module",
   "main": "./dist/TwoAuthApi.js",
-  "types": "./dist/types/TwoAuthApi.d.ts",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "build": "rm -rf ./dist && tsc"
   },
