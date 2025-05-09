@@ -1,9 +1,12 @@
 {
   "name": "@povario/2fauth.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A module for interacting with the 2FAuth API",
   "keywords": [
     "2fauth"
+  ],
+  "files": [
+    "./dist"
   ],
   "homepage": "https://github.com/powermaker450/2fauth.js#readme",
   "bugs": {
