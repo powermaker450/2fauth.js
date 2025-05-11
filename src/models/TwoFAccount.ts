@@ -7,6 +7,7 @@ interface TwoFAccountCommons<WithSecret extends boolean = false> {
   account: string;
   icon: string | null;
   otp_type: OtpType;
+  period: number;
   secret: WithSecret extends true ? string : null;
   digits: number | null;
   algorithm: AlgorithmType;
