@@ -5,6 +5,7 @@ import {
   OTPAuthUri,
   TwoFAccount,
 } from "../models";
+import { ExportResponseType } from "../models/ExportResponseType";
 import { TwoAuthApi } from "../TwoAuthApi";
 
 type GetAllArgs<S extends boolean, O extends boolean> = S extends true
@@ -174,9 +175,9 @@ export class TwoAuthAccounts {
    *
    * @return Either a list of OTPAuthUris or 2FAuth objects
    */
-  public async export<O extends boolean = false>(
+  public async export<O extends ExportResponseType = ExportResponseType>(
     ids: number[],
-    ...args: O extends true ? [O] : []
+    ...args: O extends "otpauth" ? [true] : []
   ): Promise<ExportResponse<O>> {
     const res = await this.api.get<ExportResponse<O>>(
       TwoAuthAccounts.BASE_ROUTE + "/export",

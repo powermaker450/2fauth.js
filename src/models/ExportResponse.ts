@@ -1,8 +1,25 @@
+import { ExportResponseType } from "./ExportResponseType";
 import { TwoFAccount } from "./TwoFAccount";
 
-export interface ExportResponse<OtpAuth extends boolean> {
+interface ExportResponseCommons {
   app: string;
-  schema: OtpAuth extends true ? undefined : number;
+  schema?: number;
   datetime: string;
-  data: OtpAuth extends true ? string[] : TwoFAccount<true>;
+  data: TwoFAccount<true>[] | string[];
 }
+
+interface ExportResponseAsJson extends ExportResponseCommons {
+  schema: number;
+  data: TwoFAccount<true>[];
+}
+
+interface ExportResponseAsOtpAuth extends ExportResponseCommons { 
+  schema?: never;
+  data: string[];
+}
+
+export type ExportResponse<T extends ExportResponseType = ExportResponseType> = 
+  T extends "otpauth" ? ExportResponseAsOtpAuth
+  : T extends "json" ? ExportResponseAsJson
+  : T extends ExportResponseType ? ExportResponseCommons
+  : never;

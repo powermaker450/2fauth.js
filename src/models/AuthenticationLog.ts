@@ -1,3 +1,5 @@
+import { AuthenticationLogType } from "./AuthenticationLogType";
+
 interface AuthenticationLogCommons {
   id: number;
   ip_address: string;
@@ -24,4 +26,8 @@ interface FailedAuthentication extends AuthenticationLogCommons {
   duration: null;
 }
 
-export type AuthenticationLog = SuccessfulAuthentication | FailedAuthentication;
+export type AuthenticationLog<T extends AuthenticationLogType = AuthenticationLogType> =
+  T extends "success" ? SuccessfulAuthentication
+  : T extends "fail" ? FailedAuthentication
+  : T extends AuthenticationLogType ? AuthenticationLogCommons
+  : never;

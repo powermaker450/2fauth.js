@@ -48,7 +48,7 @@ export class TwoAuthApi {
   /**
    * @internal
    */
-  public async get<T extends object | unknown = unknown>(
+  public async get<T extends object | void = object>(
     url: string,
     params?: object,
   ): Promise<AxiosResponse<T>> {
@@ -58,7 +58,7 @@ export class TwoAuthApi {
   /**
    * @internal
    */
-  public async post<T extends object | unknown = unknown>(
+  public async post<T extends object | void = object>(
     url: string,
     data?: object,
     params?: object,
@@ -69,7 +69,7 @@ export class TwoAuthApi {
   /**
    * @internal
    */
-  public async put<T extends object | unknown = unknown>(
+  public async put<T extends object | void = object>(
     url: string,
     data?: object,
     params?: object,
@@ -80,10 +80,10 @@ export class TwoAuthApi {
   /**
    * @internal
    */
-  public async patch<T extends object | unknown = unknown>(
+  public async patch<T extends object | void = object>(
     url: string,
     data?: object,
-  ) {
+  ): Promise<AxiosResponse<T>> {
     return await this.axios.patch<T>(url, data);
   }
 }

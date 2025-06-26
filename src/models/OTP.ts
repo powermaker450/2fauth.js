@@ -16,4 +16,8 @@ interface HOTP extends OTPCommons {
   counter: number;
 }
 
-export type OTP = TOTP | HOTP;
+export type OTP<T extends OtpType = OtpType> = 
+  T extends "totp" ? TOTP
+  : T extends "hotp" ? HOTP
+  : T extends OtpType ? OTPCommons
+  : never;

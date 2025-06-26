@@ -1,4 +1,5 @@
 import { Setting } from "../models";
+import { SettingValue } from "../models/SettingValue";
 import { TwoAuthApi } from "../TwoAuthApi";
 
 export class TwoAuthUserPrefs {
@@ -34,14 +35,15 @@ export class TwoAuthUserPrefs {
    *
    * @returns The modified setting
    */
-  public async update(
+  public async update<V extends SettingValue, R extends Setting<V>>(
     name: string,
-    value: string | boolean | number,
-  ): Promise<Setting<typeof value>> {
-    const res = await this.api.put<Setting<typeof value>>(
+    value: V,
+  ): Promise<R> {
+    const res = await this.api.put<Setting<V>>(
       TwoAuthUserPrefs.BASE_ROUTE + `/${name}`,
       { value },
     );
-    return res.data;
+
+    return res.data as R;
   }
 }
