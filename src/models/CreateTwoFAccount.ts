@@ -20,8 +20,10 @@ interface HOTPAccount extends TwoFAccountCommons {
   counter: number;
 }
 
-export type CreateTwoFAccount<T extends OtpType = OtpType> =
-  T extends "totp" ? TOTPAccount
-  : T extends "hotp" ? HOTPAccount
-  : T extends OtpType ? TwoFAccountCommons
-  : never;
+export type CreateTwoFAccount<T extends OtpType = OtpType> = T extends "totp"
+  ? TOTPAccount
+  : T extends "hotp"
+    ? HOTPAccount
+    : T extends OtpType
+      ? TwoFAccountCommons
+      : never;

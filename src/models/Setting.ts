@@ -18,9 +18,12 @@ interface NumberSetting extends SettingCommons {
   value: number;
 }
 
-export type Setting<V extends SettingValue = SettingValue> =
-  V extends string ? StringSetting
-  : V extends boolean ? BooleanSetting
-  : V extends number ? NumberSetting
-  : V extends SettingValue ? SettingCommons
-  : never;
+export type Setting<V extends SettingValue = SettingValue> = V extends string
+  ? StringSetting
+  : V extends boolean
+    ? BooleanSetting
+    : V extends number
+      ? NumberSetting
+      : V extends SettingValue
+        ? SettingCommons
+        : never;

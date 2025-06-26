@@ -13,13 +13,16 @@ interface ExportResponseAsJson extends ExportResponseCommons {
   data: TwoFAccount<true>[];
 }
 
-interface ExportResponseAsOtpAuth extends ExportResponseCommons { 
+interface ExportResponseAsOtpAuth extends ExportResponseCommons {
   schema?: never;
   data: string[];
 }
 
-export type ExportResponse<T extends ExportResponseType = ExportResponseType> = 
-  T extends "otpauth" ? ExportResponseAsOtpAuth
-  : T extends "json" ? ExportResponseAsJson
-  : T extends ExportResponseType ? ExportResponseCommons
-  : never;
+export type ExportResponse<T extends ExportResponseType = ExportResponseType> =
+  T extends "otpauth"
+    ? ExportResponseAsOtpAuth
+    : T extends "json"
+      ? ExportResponseAsJson
+      : T extends ExportResponseType
+        ? ExportResponseCommons
+        : never;
