@@ -14,16 +14,6 @@ import { TwoAuthUsers } from "./paths/TwoAuthUsers";
 export class TwoAuthApi {
   protected axios: Axios;
 
-  public readonly groups: TwoAuthGroups;
-  public readonly icons: TwoAuthIcons;
-  public readonly otp: TwoAuthOTP;
-  public readonly qrcode: TwoAuthQRCode;
-  public readonly settings: TwoAuthSettings;
-  public readonly accounts: TwoAuthAccounts;
-  public readonly self: TwoAuthUser;
-  public readonly prefs: TwoAuthUserPrefs;
-  public readonly users: TwoAuthUsers;
-
   public constructor(baseURL: string, token: string) {
     if (!baseURL.startsWith("http")) {
       throw new Error("An invalid URL was provided.");
@@ -33,17 +23,17 @@ export class TwoAuthApi {
       baseURL,
       headers: { Authorization: `Bearer ${token}` },
     });
-
-    this.groups = new TwoAuthGroups(this);
-    this.icons = new TwoAuthIcons(this);
-    this.otp = new TwoAuthOTP(this);
-    this.qrcode = new TwoAuthQRCode(this);
-    this.settings = new TwoAuthSettings(this);
-    this.accounts = new TwoAuthAccounts(this);
-    this.self = new TwoAuthUser(this);
-    this.prefs = new TwoAuthUserPrefs(this);
-    this.users = new TwoAuthUsers(this);
   }
+
+  public readonly groups = new TwoAuthGroups(this);
+  public readonly icons = new TwoAuthIcons(this);
+  public readonly otp = new TwoAuthOTP(this);
+  public readonly qrcode = new TwoAuthQRCode(this);
+  public readonly settings = new TwoAuthSettings(this);
+  public readonly accounts = new TwoAuthAccounts(this);
+  public readonly self = new TwoAuthUser(this);
+  public readonly prefs = new TwoAuthUserPrefs(this);
+  public readonly users = new TwoAuthUsers(this);
 
   /**
    * @internal
