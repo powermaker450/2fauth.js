@@ -33,10 +33,10 @@ export class TwoAuthAccounts {
   public async getAll<S extends boolean = false, O extends boolean = false>(
     ...args: GetAllArgs<S, O>
   ): Promise<TwoFAccount<S>[]> {
-    const res = await this.api.get<TwoFAccount<S>[]>(
-      BaseRoute.Accounts,
-      { withSecret: args[0], withOtp: args[1] },
-    );
+    const res = await this.api.get<TwoFAccount<S>[]>(BaseRoute.Accounts, {
+      withSecret: args[0],
+      withOtp: args[1],
+    });
     return res.data;
   }
 
@@ -77,10 +77,9 @@ export class TwoAuthAccounts {
     id: number,
     ...args: S extends true ? [S] : []
   ): Promise<Account<S>> {
-    const res = await this.api.get<Account<S>>(
-      `${BaseRoute.Accounts}/${id}`,
-      { withSecret: args[0] },
-    );
+    const res = await this.api.get<Account<S>>(`${BaseRoute.Accounts}/${id}`, {
+      withSecret: args[0],
+    });
     return res.data;
   }
 

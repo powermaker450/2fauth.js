@@ -11,9 +11,20 @@ import {
 } from "./paths";
 import { TwoAuthUsers } from "./paths/TwoAuthUsers";
 import { BaseRoute } from "./util";
-import { Account, AdminUserRead, AuthenticationLog, ExportResponse, Group, OTP, QRCode, Setting, TwoFAccount, UserRead } from "./models";
+import {
+  Account,
+  AdminUserRead,
+  AuthenticationLog,
+  ExportResponse,
+  Group,
+  OTP,
+  QRCode,
+  Setting,
+  TwoFAccount,
+  UserRead,
+} from "./models";
 
-type DeleteRoute = 
+type DeleteRoute =
   | BaseRoute.Accounts
   | `${BaseRoute.Accounts | BaseRoute.Groups}/${number}`
   | `${BaseRoute.Icons}/${string}`
@@ -21,20 +32,33 @@ type DeleteRoute =
   | `${BaseRoute.Users}/${number}`
   | `${BaseRoute.Users}/${number}/${"pats" | "credentials"}`;
 
-type GetRoute<R> =
-  R extends TwoFAccount<boolean>[] ? BaseRoute.Accounts | `${BaseRoute.Accounts | BaseRoute.Groups}/${number}/twofaccounts`
-  : R extends AdminUserRead ? BaseRoute.Users | `${BaseRoute.Users}/${number}`
-  : R extends Account<boolean> ? `${BaseRoute.Accounts}/${number}`
-  : R extends ExportResponse ? `${BaseRoute.Accounts}/export`
-  : R extends Group[] ? BaseRoute.Groups
-  : R extends Group ? `${BaseRoute.Groups}/${number}`
-  : R extends OTP ? `${BaseRoute.Accounts}/${number}/otp`
-  : R extends QRCode ? `${BaseRoute.Accounts}/${number}/qrcode`
-  : R extends Setting[] ? BaseRoute.Settings | BaseRoute.UserPrefs
-  : R extends Setting ? `${BaseRoute.Settings | BaseRoute.UserPrefs}/${string}`
-  : R extends UserRead ? BaseRoute.User
-  : R extends AuthenticationLog[] ? `${BaseRoute.Users}/${number}/authentications`
-  : string;
+type GetRoute<R> = R extends TwoFAccount<boolean>[]
+  ?
+      | BaseRoute.Accounts
+      | `${BaseRoute.Accounts | BaseRoute.Groups}/${number}/twofaccounts`
+  : R extends AdminUserRead
+    ? BaseRoute.Users | `${BaseRoute.Users}/${number}`
+    : R extends Account<boolean>
+      ? `${BaseRoute.Accounts}/${number}`
+      : R extends ExportResponse
+        ? `${BaseRoute.Accounts}/export`
+        : R extends Group[]
+          ? BaseRoute.Groups
+          : R extends Group
+            ? `${BaseRoute.Groups}/${number}`
+            : R extends OTP
+              ? `${BaseRoute.Accounts}/${number}/otp`
+              : R extends QRCode
+                ? `${BaseRoute.Accounts}/${number}/qrcode`
+                : R extends Setting[]
+                  ? BaseRoute.Settings | BaseRoute.UserPrefs
+                  : R extends Setting
+                    ? `${BaseRoute.Settings | BaseRoute.UserPrefs}/${string}`
+                    : R extends UserRead
+                      ? BaseRoute.User
+                      : R extends AuthenticationLog[]
+                        ? `${BaseRoute.Users}/${number}/authentications`
+                        : string;
 
 export class TwoAuthApi {
   protected axios: Axios;

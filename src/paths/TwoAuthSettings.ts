@@ -40,9 +40,7 @@ export class TwoAuthSettings {
    * @returns An application setting
    */
   public async get(name: string): Promise<Setting> {
-    const res = await this.api.get<Setting>(
-      `${BaseRoute.Settings}/${name}`
-    );
+    const res = await this.api.get<Setting>(`${BaseRoute.Settings}/${name}`);
     return res.data;
   }
 

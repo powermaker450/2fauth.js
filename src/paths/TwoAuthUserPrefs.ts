@@ -25,9 +25,7 @@ export class TwoAuthUserPrefs {
    * Get a single setting.
    */
   public async get(name: string): Promise<Setting> {
-    const res = await this.api.get<Setting>(
-      `${BaseRoute.UserPrefs}/${name}`
-    );
+    const res = await this.api.get<Setting>(`${BaseRoute.UserPrefs}/${name}`);
     return res.data;
   }
 

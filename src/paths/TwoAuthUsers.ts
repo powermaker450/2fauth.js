@@ -41,9 +41,7 @@ export class TwoAuthUsers {
    * @return A single User
    */
   public async get(id: number): Promise<AdminUserRead> {
-    const res = await this.api.get<AdminUserRead>(
-      `${BaseRoute.Users}/${id}`
-    );
+    const res = await this.api.get<AdminUserRead>(`${BaseRoute.Users}/${id}`);
     return res.data;
   }
 

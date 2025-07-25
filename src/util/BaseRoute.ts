@@ -7,4 +7,4 @@ export enum BaseRoute {
   User = "/api/v1/user",
   UserPrefs = "/api/v1/user/preferences",
   Users = "/api/v1/users",
-};
+}
