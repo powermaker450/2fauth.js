@@ -6,6 +6,7 @@ export * from "./CreateUser";
 export * from "./DecodedQRCode";
 export * from "./ExportResponse";
 export * from "./Group";
+export * from "./IconQuery";
 export * from "./ImageUploadResponse";
 export * from "./OTP";
 export * from "./OTPAuthUri";

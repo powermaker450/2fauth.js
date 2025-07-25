@@ -1,4 +1,4 @@
-import { ImageUploadResponse } from "../models";
+import { IconQuery, ImageUploadResponse } from "../models";
 import { TwoAuthApi } from "../TwoAuthApi";
 
 export class TwoAuthIcons {
@@ -20,6 +20,21 @@ export class TwoAuthIcons {
     const res = await this.api.post<ImageUploadResponse>(
       TwoAuthIcons.BASE_ROUTE,
       image,
+    );
+    return res.data;
+  }
+
+  /**
+   * Get an official icon of a given service.
+   *
+   * @param query - The data used to request an icon
+   *
+   * @returns The filename of the requested icon, if successful
+   */
+  public async query(data: IconQuery): Promise<ImageUploadResponse> {
+    const res = await this.api.post<ImageUploadResponse>(
+      TwoAuthIcons.BASE_ROUTE,
+      data,
     );
     return res.data;
   }
