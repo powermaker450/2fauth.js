@@ -1,5 +1,6 @@
 import { Account, Group } from "../models";
 import { TwoAuthApi } from "../TwoAuthApi";
+import { BaseRoute } from "../util";
 
 export class TwoAuthGroups {
   private static readonly BASE_ROUTE = "/api/v1/groups";
@@ -15,7 +16,7 @@ export class TwoAuthGroups {
    * @returns An array of groups
    */
   public async getAll(): Promise<Group[]> {
-    const res = await this.api.get<Group[]>(TwoAuthGroups.BASE_ROUTE);
+    const res = await this.api.get<Group[]>(BaseRoute.Groups);
     return res.data;
   }
 
@@ -39,7 +40,7 @@ export class TwoAuthGroups {
    * @returns The group associated with the id
    */
   public async get(id: number): Promise<Group> {
-    const res = await this.api.get<Group>(TwoAuthGroups.BASE_ROUTE + `/${id}`);
+    const res = await this.api.get<Group>(`${BaseRoute.Groups}/${id}`);
     return res.data;
   }
 
@@ -64,7 +65,7 @@ export class TwoAuthGroups {
    * @param id - The ID of the group
    */
   public async delete(id: number): Promise<void> {
-    await this.api.delete(TwoAuthGroups.BASE_ROUTE + `/${id}`);
+    await this.api.delete(`${BaseRoute.Groups}/${id}`);
   }
 
   /**
@@ -94,7 +95,7 @@ export class TwoAuthGroups {
     ...args: S extends true ? [S] : []
   ): Promise<Account<S>[]> {
     const res = await this.api.get<Account<S>[]>(
-      TwoAuthGroups.BASE_ROUTE + `/${id}/twofaccounts`,
+      `${BaseRoute.Groups}/${id}/twofaccounts`,
       { withSecret: args[0] },
     );
     return res.data;

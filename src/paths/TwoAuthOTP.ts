@@ -1,5 +1,6 @@
 import { OTP, OTPAuthUri, CreateTwoFAccount } from "../models";
 import { TwoAuthApi } from "../TwoAuthApi";
+import { BaseRoute } from "../util";
 
 export class TwoAuthOTP {
   private static readonly BASE_ROUTE = "/api/v1/twofaccounts";
@@ -17,7 +18,7 @@ export class TwoAuthOTP {
    * @returns OTP
    */
   public async get(id: number): Promise<OTP> {
-    const res = await this.api.get<OTP>(TwoAuthOTP.BASE_ROUTE + `/${id}/otp`);
+    const res = await this.api.get<OTP>(`${BaseRoute.Accounts}/${id}/otp`);
     return res.data;
   }
 

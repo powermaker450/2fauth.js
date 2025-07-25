@@ -1,8 +1,8 @@
 import { UserRead } from "../models";
 import { TwoAuthApi } from "../TwoAuthApi";
+import { BaseRoute } from "../util";
 
 export class TwoAuthUser {
-  private static readonly BASE_ROUTE = "/api/v1/user";
   private api: TwoAuthApi;
 
   public constructor(api: TwoAuthApi) {
@@ -13,7 +13,7 @@ export class TwoAuthUser {
    * Get info about the current user.
    */
   public async getSelf(): Promise<UserRead> {
-    const res = await this.api.get<UserRead>(TwoAuthUser.BASE_ROUTE);
+    const res = await this.api.get<UserRead>(BaseRoute.User);
     return res.data;
   }
 }

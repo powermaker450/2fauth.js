@@ -1,5 +1,6 @@
 import { Setting } from "../models";
 import { TwoAuthApi } from "../TwoAuthApi";
+import { BaseRoute } from "../util";
 
 export class TwoAuthSettings {
   private static readonly BASE_ROUTE = "/api/v1/settings";
@@ -15,7 +16,7 @@ export class TwoAuthSettings {
    * @returns An array of settings
    */
   public async getAll(): Promise<Setting[]> {
-    const res = await this.api.get<Setting[]>(TwoAuthSettings.BASE_ROUTE);
+    const res = await this.api.get<Setting[]>(BaseRoute.Settings);
     return res.data;
   }
 
@@ -40,7 +41,7 @@ export class TwoAuthSettings {
    */
   public async get(name: string): Promise<Setting> {
     const res = await this.api.get<Setting>(
-      TwoAuthSettings.BASE_ROUTE + `/${name}`,
+      `${BaseRoute.Settings}/${name}`
     );
     return res.data;
   }
@@ -67,6 +68,6 @@ export class TwoAuthSettings {
    * @param name - The setting to delete
    */
   public async delete(name: string): Promise<void> {
-    await this.api.delete(TwoAuthSettings.BASE_ROUTE + `/${name}`);
+    await this.api.delete(`${BaseRoute.Settings}/${name}`);
   }
 }

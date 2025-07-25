@@ -7,6 +7,7 @@ import {
 } from "../models";
 import { ExportResponseType } from "../models/ExportResponseType";
 import { TwoAuthApi } from "../TwoAuthApi";
+import { BaseRoute } from "../util";
 
 type GetAllArgs<S extends boolean, O extends boolean> = S extends true
   ? O extends true
@@ -15,7 +16,7 @@ type GetAllArgs<S extends boolean, O extends boolean> = S extends true
   : [];
 
 export class TwoAuthAccounts {
-  private static readonly BASE_ROUTE = "/api/v1/twofaccounts";
+  private static readonly BASE_ROUTE = BaseRoute.Accounts;
   private api: TwoAuthApi;
 
   public constructor(api: TwoAuthApi) {
@@ -33,7 +34,7 @@ export class TwoAuthAccounts {
     ...args: GetAllArgs<S, O>
   ): Promise<TwoFAccount<S>[]> {
     const res = await this.api.get<TwoFAccount<S>[]>(
-      TwoAuthAccounts.BASE_ROUTE,
+      BaseRoute.Accounts,
       { withSecret: args[0], withOtp: args[1] },
     );
     return res.data;
@@ -77,7 +78,7 @@ export class TwoAuthAccounts {
     ...args: S extends true ? [S] : []
   ): Promise<Account<S>> {
     const res = await this.api.get<Account<S>>(
-      TwoAuthAccounts.BASE_ROUTE + `/${id}`,
+      `${BaseRoute.Accounts}/${id}`,
       { withSecret: args[0] },
     );
     return res.data;
@@ -104,7 +105,7 @@ export class TwoAuthAccounts {
    * @param id - The ID of the account to delete
    */
   public async delete(id: number): Promise<void> {
-    await this.api.delete(TwoAuthAccounts.BASE_ROUTE + `/${id}`);
+    await this.api.delete(`${BaseRoute.Accounts}/${id}`);
   }
 
   /**
@@ -180,7 +181,8 @@ export class TwoAuthAccounts {
     ...args: O extends "otpauth" ? [true] : []
   ): Promise<ExportResponse<O>> {
     const res = await this.api.get<ExportResponse<O>>(
-      TwoAuthAccounts.BASE_ROUTE + "/export",
+      // @ts-ignore
+      `${BaseRoute.Accounts}/export`,
       { ids, otpauth: args[0] },
     );
     return res.data;
@@ -198,7 +200,7 @@ export class TwoAuthAccounts {
     ...args: S extends true ? [S] : []
   ): Promise<TwoFAccount<S>[]> {
     const res = await this.api.get<TwoFAccount<S>[]>(
-      TwoAuthAccounts.BASE_ROUTE + `/${id}/twofaccounts`,
+      `${BaseRoute.Accounts}/${id}/twofaccounts`,
       { withSecret: args[0] },
     );
     return res.data;

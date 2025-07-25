@@ -1,5 +1,6 @@
 import { IconQuery, ImageUploadResponse } from "../models";
 import { TwoAuthApi } from "../TwoAuthApi";
+import { BaseRoute } from "../util";
 
 export class TwoAuthIcons {
   private static readonly BASE_ROUTE = "/api/v1/icons";
@@ -45,6 +46,6 @@ export class TwoAuthIcons {
    * @param filename - Filename (with extension) of the icon file to delete from the server
    */
   public async delete(filename: string): Promise<void> {
-    await this.api.delete(TwoAuthIcons.BASE_ROUTE + `/${filename}`);
+    await this.api.delete(`${BaseRoute.Icons}/${filename}`);
   }
 }

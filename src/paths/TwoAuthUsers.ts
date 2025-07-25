@@ -1,5 +1,6 @@
 import { AdminUserRead, AuthenticationLog, CreateUser } from "../models";
 import { TwoAuthApi } from "../TwoAuthApi";
+import { BaseRoute } from "../util";
 
 export class TwoAuthUsers {
   private static readonly BASE_ROUTE = "/api/v1/users";
@@ -15,7 +16,7 @@ export class TwoAuthUsers {
    * @return An array of Users
    */
   public async getAll(): Promise<AdminUserRead> {
-    const res = await this.api.get<AdminUserRead>(TwoAuthUsers.BASE_ROUTE);
+    const res = await this.api.get<AdminUserRead>(BaseRoute.Users);
     return res.data;
   }
 
@@ -41,7 +42,7 @@ export class TwoAuthUsers {
    */
   public async get(id: number): Promise<AdminUserRead> {
     const res = await this.api.get<AdminUserRead>(
-      TwoAuthUsers.BASE_ROUTE + `/${id}`,
+      `${BaseRoute.Users}/${id}`
     );
     return res.data;
   }
@@ -52,7 +53,7 @@ export class TwoAuthUsers {
    * @param id - The user to delete
    */
   public async delete(id: number): Promise<void> {
-    await this.api.delete(TwoAuthUsers.BASE_ROUTE + `/${id}`);
+    await this.api.delete(`${BaseRoute.Users}/${id}`);
   }
 
   /**
@@ -94,7 +95,7 @@ export class TwoAuthUsers {
    * @param id - The user to revoke all personal access tokens from
    */
   public async revokeATs(id: number): Promise<void> {
-    await this.api.delete(TwoAuthUsers.BASE_ROUTE + `/${id}/pats`);
+    await this.api.delete(`${BaseRoute.Users}/${id}/pats`);
   }
 
   /**
@@ -112,7 +113,7 @@ export class TwoAuthUsers {
     period?: number,
   ): Promise<AuthenticationLog[]> {
     const res = await this.api.get<AuthenticationLog[]>(
-      TwoAuthUsers.BASE_ROUTE + `/${id}/authentications`,
+      `${BaseRoute.Users}/${id}/authentications`,
       { limit, period },
     );
     return res.data;
@@ -124,6 +125,6 @@ export class TwoAuthUsers {
    * @param id - The user to revoke all WebAuthn credentials from
    */
   public async revokeWebAuthn(id: number): Promise<void> {
-    await this.api.delete(TwoAuthUsers.BASE_ROUTE + `/${id}/credentials`);
+    await this.api.delete(`${BaseRoute.Users}/${id}/credentials`);
   }
 }

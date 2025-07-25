@@ -1,6 +1,7 @@
 import { Setting } from "../models";
 import { SettingValue } from "../models/SettingValue";
 import { TwoAuthApi } from "../TwoAuthApi";
+import { BaseRoute } from "../util";
 
 export class TwoAuthUserPrefs {
   private static readonly BASE_ROUTE = "/api/v1/user/preferences";
@@ -16,7 +17,7 @@ export class TwoAuthUserPrefs {
    * @returns An array of settings
    */
   public async getAll(): Promise<Setting[]> {
-    const res = await this.api.get<Setting[]>(TwoAuthUserPrefs.BASE_ROUTE);
+    const res = await this.api.get<Setting[]>(BaseRoute.UserPrefs);
     return res.data;
   }
 
@@ -25,7 +26,7 @@ export class TwoAuthUserPrefs {
    */
   public async get(name: string): Promise<Setting> {
     const res = await this.api.get<Setting>(
-      TwoAuthUserPrefs.BASE_ROUTE + `/${name}`,
+      `${BaseRoute.UserPrefs}/${name}`
     );
     return res.data;
   }
