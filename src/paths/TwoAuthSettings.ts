@@ -3,7 +3,6 @@ import { TwoAuthApi } from "../TwoAuthApi";
 import { BaseRoute } from "../util";
 
 export class TwoAuthSettings {
-  private static readonly BASE_ROUTE = "/api/v1/settings";
   private api: TwoAuthApi;
 
   public constructor(api: TwoAuthApi) {
@@ -53,10 +52,9 @@ export class TwoAuthSettings {
    * @returns THe newly updated setting
    */
   public async update(name: string, value: Setting["value"]): Promise<Setting> {
-    const res = await this.api.put<Setting>(
-      TwoAuthSettings.BASE_ROUTE + `/${name}`,
-      { value },
-    );
+    const res = await this.api.put<Setting>(`${BaseRoute.Settings}/${name}`, {
+      value,
+    });
     return res.data;
   }
 

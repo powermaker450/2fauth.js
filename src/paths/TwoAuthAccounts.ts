@@ -95,7 +95,7 @@ export class TwoAuthAccounts {
    */
   public async update(id: number, data: TwoFAccount): Promise<Account> {
     const res = await this.api.put<TwoFAccount>(
-      TwoAuthAccounts.BASE_ROUTE + `/${id}`,
+      `${BaseRoute.Accounts}/${id}`,
       data,
     );
     return res.data;

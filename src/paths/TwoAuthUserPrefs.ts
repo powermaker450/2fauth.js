@@ -4,7 +4,6 @@ import { TwoAuthApi } from "../TwoAuthApi";
 import { BaseRoute } from "../util";
 
 export class TwoAuthUserPrefs {
-  private static readonly BASE_ROUTE = "/api/v1/user/preferences";
   private api: TwoAuthApi;
 
   public constructor(api: TwoAuthApi) {
@@ -39,7 +38,8 @@ export class TwoAuthUserPrefs {
     value: V,
   ): Promise<R> {
     const res = await this.api.put<Setting<V>>(
-      TwoAuthUserPrefs.BASE_ROUTE + `/${name}`,
+      // @ts-ignore
+      `${BaseRoute.UserPrefs}/${name}`,
       { value },
     );
 

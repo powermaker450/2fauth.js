@@ -25,6 +25,7 @@ import {
   TwoFAccount,
   UserRead,
 } from "./models";
+import { SettingValue } from "./models/SettingValue";
 
 type DeleteRoute =
   | BaseRoute.Accounts
@@ -83,6 +84,16 @@ type PostRoute<T> = T extends AdminUserRead
                   : T extends void
                     ? `${BaseRoute.Accounts}/reorder`
                     : string;
+
+type PutRoute<T> = T extends TwoFAccount
+  ? `${BaseRoute.Accounts}/${number}`
+  : T extends Group
+    ? `${BaseRoute.Groups}/${number}`
+    : T extends Setting
+      ? `${BaseRoute.Settings}/${string}`
+      : T extends Setting<SettingValue>
+        ? `${BaseRoute.UserPrefs}/${string}`
+        : string;
 
 export class TwoAuthApi {
   protected axios: Axios;
@@ -143,7 +154,7 @@ export class TwoAuthApi {
    * @internal
    */
   public async put<T extends object | void = object>(
-    url: string,
+    url: PutRoute<T>,
     data?: object,
     params?: object,
   ): Promise<AxiosResponse<T>> {

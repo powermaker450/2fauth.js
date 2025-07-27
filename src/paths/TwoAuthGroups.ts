@@ -3,7 +3,6 @@ import { TwoAuthApi } from "../TwoAuthApi";
 import { BaseRoute } from "../util";
 
 export class TwoAuthGroups {
-  private static readonly BASE_ROUTE = "/api/v1/groups";
   private api: TwoAuthApi;
 
   public constructor(api: TwoAuthApi) {
@@ -53,7 +52,7 @@ export class TwoAuthGroups {
    * @returns The newly updated group
    */
   public async update(id: number, name: string): Promise<Group> {
-    const res = await this.api.put<Group>(TwoAuthGroups.BASE_ROUTE + `/${id}`, {
+    const res = await this.api.put<Group>(`${BaseRoute.Groups}/${id}`, {
       name,
     });
     return res.data;
