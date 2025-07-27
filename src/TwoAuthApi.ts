@@ -15,8 +15,10 @@ import {
   Account,
   AdminUserRead,
   AuthenticationLog,
+  DecodedQRCode,
   ExportResponse,
   Group,
+  ImageUploadResponse,
   OTP,
   QRCode,
   Setting,
@@ -59,6 +61,28 @@ type GetRoute<R> = R extends TwoFAccount<boolean>[]
                       : R extends AuthenticationLog[]
                         ? `${BaseRoute.Users}/${number}/authentications`
                         : string;
+
+type PostRoute<T> = T extends AdminUserRead
+  ? BaseRoute.Users
+  : T extends TwoFAccount<true>
+    ? BaseRoute.Accounts
+    : T extends TwoFAccount<boolean>[]
+      ? `${BaseRoute.Accounts}/migration`
+      : T extends TwoFAccount
+        ? `${BaseRoute.Accounts}/preview`
+        : T extends Group
+          ? BaseRoute.Groups | `${BaseRoute.Groups}/${number}/assign`
+          : T extends ImageUploadResponse
+            ? BaseRoute.Icons
+            : T extends OTP
+              ? `${BaseRoute.Accounts}/otp`
+              : T extends DecodedQRCode
+                ? `${BaseRoute.QrCode}/decode`
+                : T extends Setting
+                  ? BaseRoute.Settings
+                  : T extends void
+                    ? `${BaseRoute.Accounts}/reorder`
+                    : string;
 
 export class TwoAuthApi {
   protected axios: Axios;
@@ -108,7 +132,7 @@ export class TwoAuthApi {
    * @internal
    */
   public async post<T extends object | void = object>(
-    url: string,
+    url: PostRoute<T>,
     data?: object,
     params?: object,
   ): Promise<AxiosResponse<T>> {

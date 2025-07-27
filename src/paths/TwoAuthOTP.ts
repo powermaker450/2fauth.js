@@ -3,7 +3,6 @@ import { TwoAuthApi } from "../TwoAuthApi";
 import { BaseRoute } from "../util";
 
 export class TwoAuthOTP {
-  private static readonly BASE_ROUTE = "/api/v1/twofaccounts";
   private api: TwoAuthApi;
 
   public constructor(api: TwoAuthApi) {
@@ -30,7 +29,7 @@ export class TwoAuthOTP {
    * @returns OTP
    */
   public async create(data: CreateTwoFAccount | OTPAuthUri): Promise<OTP> {
-    const res = await this.api.post<OTP>(TwoAuthOTP.BASE_ROUTE + "/otp", data);
+    const res = await this.api.post<OTP>(`${BaseRoute.Accounts}/otp`, data);
     return res.data;
   }
 }

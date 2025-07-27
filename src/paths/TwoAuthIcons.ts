@@ -3,7 +3,6 @@ import { TwoAuthApi } from "../TwoAuthApi";
 import { BaseRoute } from "../util";
 
 export class TwoAuthIcons {
-  private static readonly BASE_ROUTE = "/api/v1/icons";
   private api: TwoAuthApi;
 
   public constructor(api: TwoAuthApi) {
@@ -19,7 +18,7 @@ export class TwoAuthIcons {
    */
   public async upload(image: FormData): Promise<ImageUploadResponse> {
     const res = await this.api.post<ImageUploadResponse>(
-      TwoAuthIcons.BASE_ROUTE,
+      BaseRoute.Icons,
       image,
     );
     return res.data;
@@ -33,10 +32,7 @@ export class TwoAuthIcons {
    * @returns The filename of the requested icon, if successful
    */
   public async query(data: IconQuery): Promise<ImageUploadResponse> {
-    const res = await this.api.post<ImageUploadResponse>(
-      TwoAuthIcons.BASE_ROUTE,
-      data,
-    );
+    const res = await this.api.post<ImageUploadResponse>(BaseRoute.Icons, data);
     return res.data;
   }
 

@@ -28,7 +28,7 @@ export class TwoAuthSettings {
    * @returns The newly added setting
    */
   public async add(data: Setting): Promise<Setting> {
-    const res = await this.api.post<Setting>(TwoAuthSettings.BASE_ROUTE, data);
+    const res = await this.api.post<Setting>(BaseRoute.Settings, data);
     return res.data;
   }
 

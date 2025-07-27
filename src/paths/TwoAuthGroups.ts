@@ -28,7 +28,7 @@ export class TwoAuthGroups {
    * @returns The newly created group
    */
   public async create(name: string): Promise<Group> {
-    const res = await this.api.post<Group>(TwoAuthGroups.BASE_ROUTE, { name });
+    const res = await this.api.post<Group>(BaseRoute.Groups, { name });
     return res.data;
   }
 
@@ -77,10 +77,9 @@ export class TwoAuthGroups {
    * @returns The newly updated group
    */
   public async assign(id: number, ids: number[]): Promise<Group> {
-    const res = await this.api.post<Group>(
-      TwoAuthGroups.BASE_ROUTE + `/${id}/assign`,
-      { ids },
-    );
+    const res = await this.api.post<Group>(`${BaseRoute.Groups}/${id}/assign`, {
+      ids,
+    });
     return res.data;
   }
 

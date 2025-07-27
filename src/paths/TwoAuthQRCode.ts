@@ -1,5 +1,6 @@
 import { DecodedQRCode, QRCode } from "../models";
 import { TwoAuthApi } from "../TwoAuthApi";
+import { BaseRoute } from "../util";
 
 export class TwoAuthQRCode {
   private api: TwoAuthApi;
@@ -29,7 +30,7 @@ export class TwoAuthQRCode {
    */
   public async decode(data: FormData): Promise<DecodedQRCode> {
     const res = await this.api.post<DecodedQRCode>(
-      `/api/v1/qrcode/decode`,
+      `${BaseRoute.QrCode}/decode`,
       data,
     );
     return res.data;

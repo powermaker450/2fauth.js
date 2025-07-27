@@ -1,4 +1,4 @@
-export enum BaseRoute {
+export const enum BaseRoute {
   Accounts = "/api/v1/twofaccounts",
   Groups = "/api/v1/groups",
   Icons = "/api/v1/icons",

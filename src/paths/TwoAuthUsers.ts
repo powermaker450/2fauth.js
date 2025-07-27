@@ -26,10 +26,7 @@ export class TwoAuthUsers {
    * @return The newly created User
    */
   public async create(data: CreateUser): Promise<AdminUserRead> {
-    const res = await this.api.post<AdminUserRead>(
-      TwoAuthUsers.BASE_ROUTE,
-      data,
-    );
+    const res = await this.api.post<AdminUserRead>(BaseRoute.Users, data);
     return res.data;
   }
 

@@ -50,8 +50,8 @@ export class TwoAuthAccounts {
   public async create(
     data: CreateTwoFAccount | OTPAuthUri,
   ): Promise<Account<true>> {
-    const res = await this.api.post<Account<true>>(
-      TwoAuthAccounts.BASE_ROUTE,
+    const res = await this.api.post<TwoFAccount<true>>(
+      BaseRoute.Accounts,
       data,
     );
     return res.data;
@@ -77,9 +77,12 @@ export class TwoAuthAccounts {
     id: number,
     ...args: S extends true ? [S] : []
   ): Promise<Account<S>> {
-    const res = await this.api.get<Account<S>>(`${BaseRoute.Accounts}/${id}`, {
-      withSecret: args[0],
-    });
+    const res = await this.api.get<TwoFAccount<S>>(
+      `${BaseRoute.Accounts}/${id}`,
+      {
+        withSecret: args[0],
+      },
+    );
     return res.data;
   }
 
@@ -90,8 +93,8 @@ export class TwoAuthAccounts {
    *
    * @return The newly updated 2FA account
    */
-  public async update(id: number, data: Account): Promise<Account> {
-    const res = await this.api.put<Account>(
+  public async update(id: number, data: TwoFAccount): Promise<Account> {
+    const res = await this.api.put<TwoFAccount>(
       TwoAuthAccounts.BASE_ROUTE + `/${id}`,
       data,
     );
@@ -121,8 +124,8 @@ export class TwoAuthAccounts {
   ): Promise<Account<S>[]> {
     const data = typeof payload === "string" ? { payload } : payload;
 
-    const res = await this.api.post<Account<S>[]>(
-      TwoAuthAccounts.BASE_ROUTE + "/migration",
+    const res = await this.api.post<TwoFAccount<S>[]>(
+      `${BaseRoute.Accounts}/migration`,
       data,
       { withSecret: args[0] },
     );
@@ -138,7 +141,7 @@ export class TwoAuthAccounts {
    */
   public async preview(uri: string): Promise<TwoFAccount> {
     const res = await this.api.post<TwoFAccount>(
-      TwoAuthAccounts.BASE_ROUTE + "/preview",
+      `${BaseRoute.Accounts}/preview`,
       { uri },
     );
     return res.data;
@@ -150,7 +153,7 @@ export class TwoAuthAccounts {
    * @param ids - An array of IDs, with the order to display them in
    */
   public async reorder(ids: number[]): Promise<void> {
-    await this.api.post(TwoAuthAccounts.BASE_ROUTE + "/reorder", { ids });
+    await this.api.post<void>(`${BaseRoute.Accounts}/reorder`, { ids });
   }
 
   /**
