@@ -3,7 +3,6 @@ import { TwoAuthApi } from "../TwoAuthApi";
 import { BaseRoute } from "../util";
 
 export class TwoAuthUsers {
-  private static readonly BASE_ROUTE = "/api/v1/users";
   private api: TwoAuthApi;
 
   public constructor(api: TwoAuthApi) {
@@ -64,7 +63,7 @@ export class TwoAuthUsers {
     is_admin: boolean,
   ): Promise<AdminUserRead> {
     const res = await this.api.patch<AdminUserRead>(
-      TwoAuthUsers.BASE_ROUTE + `/${id}/promote`,
+      `${BaseRoute.Users}/${id}/promote`,
       { is_admin },
     );
     return res.data;
@@ -79,7 +78,7 @@ export class TwoAuthUsers {
    */
   public async resetPassword(id: number): Promise<AdminUserRead> {
     const res = await this.api.patch<AdminUserRead>(
-      TwoAuthUsers.BASE_ROUTE + `/${id}/password/reset`,
+      `${BaseRoute.Users}/${id}/password/reset`,
     );
     return res.data;
   }

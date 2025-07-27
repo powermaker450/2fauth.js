@@ -95,6 +95,14 @@ type PutRoute<T> = T extends TwoFAccount
         ? `${BaseRoute.UserPrefs}/${string}`
         : string;
 
+type PatchRoute<T> = T extends AdminUserRead
+  ?
+      | `${BaseRoute.Users}/${number}/promote`
+      | `${BaseRoute.Users}/${number}/password/reset`
+  : T extends { message: string }
+    ? `${BaseRoute.Accounts}/withdraw`
+    : string;
+
 export class TwoAuthApi {
   protected axios: Axios;
 
@@ -165,7 +173,7 @@ export class TwoAuthApi {
    * @internal
    */
   public async patch<T extends object | void = object>(
-    url: string,
+    url: PatchRoute<T>,
     data?: object,
   ): Promise<AxiosResponse<T>> {
     return await this.axios.patch<T>(url, data);

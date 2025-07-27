@@ -165,7 +165,7 @@ export class TwoAuthAccounts {
    */
   public async withdraw(ids: number[]): Promise<{ message: string }> {
     const res = await this.api.patch<{ message: string }>(
-      TwoAuthAccounts.BASE_ROUTE + "/withdraw",
+      `${BaseRoute.Accounts}/withdraw`,
       { ids },
     );
     return res.data;
