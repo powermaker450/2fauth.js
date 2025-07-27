@@ -170,8 +170,8 @@ await api.settings.getAll();
 // with an object containing an example setting
 
 await api.settings.add({
-  "key": "useEncryption",
-  "value": true
+  key: "useEncryption",
+  value: true
 });
 ```
 
