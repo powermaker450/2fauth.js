@@ -1,6 +1,6 @@
 {
   "name": "@povario/2fauth.js",
-  "version": "0.2.31",
+  "version": "0.2.32",
   "description": "A module for interacting with the 2FAuth API",
   "keywords": [
     "2fauth"
