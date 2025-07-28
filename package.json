@@ -19,7 +19,8 @@
   "license": "MIT",
   "author": "povario",
   "exports": {
-    ".": "./dist/TwoAuthApi.js"
+    ".": "./dist/TwoAuthApi.js",
+    "./models": "./dist/models/index.js"
   },
   "scripts": {
     "build": "rm -rf ./dist && tsc"
