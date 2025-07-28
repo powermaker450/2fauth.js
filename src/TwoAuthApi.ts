@@ -74,7 +74,7 @@ type PostRoute<T> = T extends AdminUserRead
         : T extends Group
           ? BaseRoute.Groups | `${BaseRoute.Groups}/${number}/assign`
           : T extends ImageUploadResponse
-            ? BaseRoute.Icons
+            ? BaseRoute.Icons | `${BaseRoute.Icons}/default`
             : T extends OTP
               ? `${BaseRoute.Accounts}/otp`
               : T extends DecodedQRCode

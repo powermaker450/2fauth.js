@@ -32,7 +32,10 @@ export class TwoAuthIcons {
    * @returns The filename of the requested icon, if successful
    */
   public async query(data: IconQuery): Promise<ImageUploadResponse> {
-    const res = await this.api.post<ImageUploadResponse>(BaseRoute.Icons, data);
+    const res = await this.api.post<ImageUploadResponse>(
+      `${BaseRoute.Icons}/default`,
+      data,
+    );
     return res.data;
   }
 

@@ -8,7 +8,7 @@ interface TwoFAccountCommons {
   otp_type: OtpType;
   secret: string;
   digits: number | null;
-  algorithm: AlgorithmType | null,
+  algorithm: AlgorithmType | null;
   group_id: number | null;
 }
 
