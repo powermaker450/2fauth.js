@@ -14,6 +14,7 @@ export * from "./IconQuery";
 export * from "./ImageUploadResponse";
 export * from "./OTP";
 export * from "./OTPAuthUri";
+export * from "./OtpType";
 export * from "./QRCode";
 export * from "./Setting";
 export * from "./SettingValue";
